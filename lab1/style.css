@@ -1,0 +1,120 @@
+.my-body {
+    background-color: #555;
+}
+
+.calc {
+  place-items: center;
+}
+
+/* опишем базовый стиль кнопки калькулятора */
+.my-btn { 
+    margin-right: 5px;           /* задаем отступ от кнопки справа */
+    margin-top: 5px;             /* задаем отступ от кнопки сверху*/
+    width: 50px;                 /* задаем ширину кнопки */
+    height: 50px;                /* задаем высоту кнопки */
+    border: none;                /* отключаем обводку */
+    border-radius: 16px;
+    background: #D26524;         /* задаем цвет кнопки */
+    color: #ffffff;                /* задаем белый цвет текста внутри кнопки */
+    font-size: 1rem;           /* увеличим размер шрифта */
+    font-family: "helveticaneuecyr", sans-serif;    /* сменим шрифт */
+    cursor: pointer;             /* при наведении на кнопку курсор будет изменен
+                                    со стрелки на 'указательный палец' */
+    user-select: none;           /* отключаем возможность выделить текст внутри кнопки */
+  } 
+  
+  /* hover - это состояние элемента, когда на него наведен курсор */
+  .my-btn:hover {
+    background: #FF7D2F; /* при наведение курсора на кнопку, она будет окрашена */
+  }
+  
+  /* active - это состояние активации элемента. В случае кнопки - нажатие на нее */
+  .my-btn:active {
+    filter: brightness(130%); /* увеличим интенсивность цвета для эффекта вспышки */
+  }
+  
+  /* селектор для кнопок первостепенных операций */
+  .my-btn.primary { 
+    background: #EFBE0E; /* цвет кнопки */
+  }
+  
+  /* селектор для кнопок второстепенных операций */
+  .my-btn.secondary { 
+    background: #83A734; /* цвет кнопки */
+  }
+  
+  /* селектор для кнопки расчета выражения (=) */
+  .my-btn.execute { 
+    width: 110px;          /* сделаем кнопку шире других */
+  }
+
+  /* селектор для поля вывода результата */
+  .result { 
+    width: 230px;
+    height: 70px;
+    margin-top: 15px;
+    margin-bottom: 15px;         /* отступ снизу */
+    padding-right: 10px;         /* выступ справа */
+    border-radius: 20px;
+    background: #B3B3B3;         /* цвет можно задавать и таким образом */
+    text-align: right;           /* примагнитим текст к правой стороне */
+    color: #ffffff;              /* цвет текста белый */
+    font-size: 40px;
+    font-family: "helveticaneuecyr", sans-serif;
+  }
+
+.corner-image {
+    position: fixed;
+    width: 50px;         /* размер картинки */
+    height: auto;
+    top: 5px;
+    left: 10px;
+}
+
+/* Сброс стилей */
+body, ul, li, a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Стили для меню */
+.navbar {
+  background-color: #333;         /* цвет фона меню */
+  padding: 10px 0;
+  background-size: cover;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.menu {
+  display: flex;
+  justify-content: left;
+}
+
+.menu li {
+  margin: 10px 15px;
+}
+
+.menu a {
+  color: white;         /* цвет текста */
+  font-size: 18px;
+  padding: 10px 15px;
+  transition: background-color 0.3s;
+}
+
+.menu a:hover {
+  background-color: #555;         /* цвет фона при наведении */
+  border-radius: 5px;
+}
