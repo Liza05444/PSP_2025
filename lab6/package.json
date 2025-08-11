@@ -2,13 +2,18 @@
   "name": "lab3",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "bootstrap": "^5.3.7"
+  },
+  "devDependencies": {
+    "vite": "^7.1.1"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }

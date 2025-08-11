@@ -1,4 +1,4 @@
-import { ajax } from "../../modules/ajax.js";
+import { Api } from "../../modules/api.js";
 import { slothUrls } from "../../modules/slothUrls.js";
 import { HeaderComponent } from "../../components/header/index.js";
 import { MainPage } from "../main/index.js";
@@ -51,7 +51,7 @@ export class CreateSlothPage {
         `;
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
         
         const messageEl = document.getElementById('message');
@@ -67,17 +67,20 @@ export class CreateSlothPage {
             facts: document.getElementById('facts').value.split('\n').filter(f => f.trim() !== '')
         };
 
-        ajax.post(slothUrls.createSloth(), newSloth, (response) => {
+        try {
+            const response = await Api.post(slothUrls.createSloth(), newSloth);
+            
             messageEl.textContent = 'Карточка успешно создана!';
             messageEl.className = 'mt-3 alert alert-success';
 
             document.getElementById('sloth-form').reset();
 
             setTimeout(() => this.goHome(), 2000);
-        }, (error) => {
+        } catch (error) {
+            console.error('Error creating sloth:', error);
             messageEl.textContent = `Ошибка: ${error.message || 'Не удалось создать карточку'}`;
             messageEl.className = 'mt-3 alert alert-danger';
-        });
+        }
     }
 
     render() {
