@@ -1,9 +1,14 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { resolve } from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.useStaticAssets(resolve(__dirname, '..', 'public'));
+  app.useStaticAssets(resolve(__dirname, '..', 'node_modules'), { prefix: '/node_modules' });
 
   app.useGlobalPipes(
     new ValidationPipe({

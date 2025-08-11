@@ -1,9 +1,9 @@
 export class Sloth {
   id: number;
   name: string;
-  image: string;
-  description: string;
+  image?: string;
+  description?: string;
   habitat: string;
-  diet: string;
+  diet?: string;
   facts: string[];
 }

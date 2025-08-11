@@ -19,13 +19,11 @@ export class SlothsService {
       : sloths;
   }
 
-  create(createSlothDto: CreateSlothDto) {
+  create(createSlothDto: CreateSlothDto): Sloth {
     const sloths = this.fileService.read();
-
-    // для простоты новый id = текущее количество карточек + 1
     const sloth = { ...createSlothDto, id: sloths.length + 1 };
-
     this.fileService.add(sloth);
+    return sloth;
   }
 
   findOne(id: number): Sloth | null {
@@ -47,11 +45,12 @@ export class SlothsService {
     this.fileService.write(updatedSloths);
   }
 
-  remove(id: number): void {
+  remove(id: number): { success: boolean } {
     const filteredSloths = this.fileService
       .read()
       .filter((sloth) => sloth.id !== id);
-
+  
     this.fileService.write(filteredSloths);
+    return { success: true };
   }
 }
