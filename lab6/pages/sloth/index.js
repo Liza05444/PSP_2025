@@ -1,4 +1,4 @@
-import { ajax } from "../../modules/ajax.js";
+import { Api } from "../../modules/api.js";
 import { slothUrls } from "../../modules/slothUrls.js";
 import { HeaderComponent } from "../../components/header/index.js";
 import { AccordionComponent } from "../../components/accordion/index.js";
@@ -16,15 +16,19 @@ export class SlothPage {
         main.render();
     }
 
-    getData() {
-        ajax.get(slothUrls.getSlothById(this.id), (data) => {
+    async getData() {
+        try {
+            const data = await Api.get(slothUrls.getSlothById(this.id));
             this.renderData(data);
-        });
+        } catch (error) {
+            console.error('Error fetching sloth data:', error);
+            this.parent.innerHTML = '<div class="p-3">Ошибка при загрузке данных</div>';
+        }
     }
 
     renderData(sloth) {
         if (!sloth) {
-            this.parent.innerHTML = '<div class="p-3">Не найден</div>';
+            this.parent.innerHTML = '<div class="p-3">Ленивец не найден</div>';
             return;
         }
 

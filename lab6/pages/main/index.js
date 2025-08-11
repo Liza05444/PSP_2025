@@ -1,5 +1,5 @@
-import { ajax } from "../../modules/ajax.js";
 import { slothUrls } from "../../modules/slothUrls.js";
+import { Api } from "../../modules/api.js";
 import { SlothCardComponent } from "../../components/sloth-card/index.js";
 import { HeaderComponent } from "../../components/header/index.js";
 import { SlothPage } from "../sloth/index.js";
@@ -26,15 +26,19 @@ export class MainPage {
         `;
     }
     
-    getData() {
-        ajax.get(slothUrls.getSloths(), (data) => {
+    async getData() {
+        try {
+            const data = await Api.get(slothUrls.getSloths());
             this.originalData = [...data];
             this.filteredData = [...data];
             
             this.renderFilters();
             this.renderAddButton();
             this.renderData();
-        });
+        } catch (error) {
+            console.error('Error fetching sloths:', error);
+            alert('Не удалось загрузить данные о ленивцах');
+        }
     }
     
     renderData() {
@@ -75,22 +79,20 @@ export class MainPage {
         this.renderData();
     }
 
-    deleteCard(id) {
+    async deleteCard(id) {
         if (!confirm('Вы уверены, что хотите удалить эту карточку?')) {
             return;
         }
         
-        ajax.delete(slothUrls.removeSlothById(id), 
-            () => {
-                this.filteredData = this.filteredData.filter(sloth => sloth.id !== id);
-                this.originalData = this.originalData.filter(sloth => sloth.id !== id);
-                this.renderData();
-            },
-            (error) => {
-                console.error('Ошибка при удалении:', error);
-                alert('Не удалось удалить карточку');
-            }
-        );
+        try {
+            await Api.delete(slothUrls.removeSlothById(id));
+            this.filteredData = this.filteredData.filter(sloth => sloth.id !== id);
+            this.originalData = this.originalData.filter(sloth => sloth.id !== id);
+            this.renderData();
+        } catch (error) {
+            console.error('Ошибка при удалении:', error);
+            alert('Не удалось удалить карточку');
+        }
     }
 
     renderFilters() {
