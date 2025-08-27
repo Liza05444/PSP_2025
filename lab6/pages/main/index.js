@@ -4,6 +4,7 @@ import { SlothCardComponent } from "../../components/sloth-card/index.js";
 import { HeaderComponent } from "../../components/header/index.js";
 import { SlothPage } from "../sloth/index.js";
 import { CreateSlothPage } from "../create-sloth/index.js";
+import { UpdateSlothPage } from "../update-sloth/index.js";
 
 export class MainPage {
     constructor(parent) {

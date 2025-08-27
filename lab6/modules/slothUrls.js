@@ -7,7 +7,7 @@ class SlothUrls {
         return `${this.baseUrl}/sloths`;
     }
 
-    getSlothById(id) {
+    slothDetail(id) {
         return `${this.baseUrl}/sloths/${id}`;
     }
 
@@ -16,10 +16,6 @@ class SlothUrls {
     }
 
     removeSlothById(id) {
-        return `${this.baseUrl}/sloths/${id}`;
-    }
-
-    updateSlothById(id) {
         return `${this.baseUrl}/sloths/${id}`;
     }
 }
