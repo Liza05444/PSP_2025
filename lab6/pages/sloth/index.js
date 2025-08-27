@@ -4,6 +4,7 @@ import { HeaderComponent } from "../../components/header/index.js";
 import { AccordionComponent } from "../../components/accordion/index.js";
 import { SlothComponent } from "../../components/sloth/index.js";
 import { MainPage } from "../main/index.js";
+import { UpdateSlothPage } from "../update-sloth/index.js";
 
 export class SlothPage {
     constructor(parent, id) {
@@ -18,7 +19,7 @@ export class SlothPage {
 
     async getData() {
         try {
-            const data = await Api.get(slothUrls.getSlothById(this.id));
+            const data = await Api.get(slothUrls.slothDetail(this.id));
             this.renderData(data);
         } catch (error) {
             console.error('Error fetching sloth data:', error);
@@ -49,6 +50,20 @@ export class SlothPage {
                 content: sloth.facts.map(f => `• ${f}`).join('<br>')
             }
         ]);
+
+        const editButton = document.createElement('button');
+        editButton.className = 'btn btn-success mt-3';
+        editButton.textContent = 'Редактировать';
+        editButton.addEventListener('click', () => this.goToUpdate(sloth.id));
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'd-flex justify-content-center';
+        buttonContainer.appendChild(editButton);
+        this.parent.appendChild(buttonContainer);
+    }
+
+    goToUpdate(slothId) {
+        const updatePage = new UpdateSlothPage(this.parent);
+        updatePage.render(slothId);
     }
 
     render() {

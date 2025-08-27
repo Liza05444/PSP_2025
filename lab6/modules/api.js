@@ -34,4 +34,27 @@ export class Api {
             throw error;
         }
     }
+
+    static async patch(url, data) {
+        try {
+            const response = await fetch(url, {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data),
+            });
+            if (response.ok) {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    return await response.json();
+                } else {
+                    return {};
+                }
+            } else {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error in PATCH request:', error);
+            throw error;
+        }
+    }
 }
